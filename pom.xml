@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.coderower</groupId>
-	<artifactId>hr-module</artifactId>
+	<artifactId>hrmodule</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>hr-module</name>
-	<description>hr-module</description>
+	<name>hrmodule</name>
+	<description>hrmodule</description>
 	<properties>
 		<java.version>17</java.version>
 	</properties>

@@ -14,7 +14,7 @@ RUN mvn package -DskipTests
 FROM eclipse-temurin:17.0.9_9-jre-alpine
 
 # Copy the jar to the production image from the builder stage.
-COPY --from=builder /app/target/hr-module-*.jar /hr-module.jar
+COPY --from=builder /app/target/hrmodule-*.jar /hrmodule.jar
 
 # Run the web service on container startup.
-CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/hr-module.jar"]
+CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/hrmodule.jar"]
