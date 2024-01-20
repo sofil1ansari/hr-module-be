@@ -88,6 +88,11 @@ public class JwtService {
                 .parseClaimsJws(token)
                 .getBody();
     }
+    
+    //extraction of id from jwt token 
+    public String parseIdFromJsonPayload(String jsonPayload) {
+        return jsonPayload.split("\"id\":")[1].split(",")[0].replaceAll("\"", "").trim();
+    }
 
     private Key getSignInKey() {
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);

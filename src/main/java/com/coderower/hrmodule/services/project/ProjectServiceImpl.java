@@ -26,18 +26,20 @@ public class ProjectServiceImpl implements ProjectService {
     }
 
     @Override
-    public Project delete(String id) {
-        Project record = repository.findById(id).get();
+    public void delete(String id) {//changed return type to void 
+        Project record = repository.findById(id);//remove get()
         repository.delete(record);
     }
 
     @Override
     public Project update(String id, Project data) {
-        Project record = repository.findById(id).get();
-        record.setName(data.getName());
-        record.setPrice(data.getPrice());
-        record.setQuantity(data.getQuantity());
-        repository.save(record);
+        Project record = repository.findById(id);//remove get()
+//        record.setName(data.getName());
+//        record.setPrice(data.getPrice());
+//        record.setQuantity(data.getQuantity());
+        if(record != null) {
+         repository.save(record);
+        }
         return record;
     }
 }

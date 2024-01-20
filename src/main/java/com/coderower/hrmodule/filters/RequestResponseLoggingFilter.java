@@ -14,6 +14,8 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
 
+import com.coderower.hrmodule.services.project.ProjectService;
+
 import java.io.IOException;
 
 @Component
@@ -21,6 +23,8 @@ import java.io.IOException;
 public class RequestResponseLoggingFilter  extends GenericFilterBean {
 
     @Autowired
+    ProjectService p;
+    
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 //        if (getAuthentication() != null) {
