@@ -3,8 +3,6 @@
 // https://stackoverflow.com/questions/1413129/modify-request-parameter-with-servlet-filter
 package com.coderower.hrmodule.filters;
 
-import com.coderower.hrmodule.database.entities.Product;
-import com.coderower.hrmodule.services.ProductService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.ServletRequest;
@@ -23,14 +21,12 @@ import java.io.IOException;
 public class RequestResponseLoggingFilter  extends GenericFilterBean {
 
     @Autowired
-    ProductService ps;
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 //        if (getAuthentication() != null) {
 //            MDC.put(MDC_KEY, getAuthentication().getName());
 //        }
 
-        Product p = ps.findProduct("string");
         try {
             request.setAttribute("test",p);
             chain.doFilter(request, response);

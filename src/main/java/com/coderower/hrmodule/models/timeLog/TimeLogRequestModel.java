@@ -1,4 +1,4 @@
-package com.coderower.hrmodule.models.product;
+package com.coderower.hrmodule.models.timeLog;
 
 import java.util.Map;
 import java.util.Optional;
