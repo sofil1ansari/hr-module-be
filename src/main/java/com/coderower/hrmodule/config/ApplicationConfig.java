@@ -1,12 +1,9 @@
 package com.coderower.hrmodule.config;
 
 import com.coderower.hrmodule.database.repositories.UserRepository;
-import com.coderower.hrmodule.database.entities.User;
-import com.coderower.hrmodule.models.auth.AuthUser;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.data.domain.AuditorAware;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -24,9 +21,8 @@ public class ApplicationConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return  username -> repository.findByEmail(username)
+        return email -> repository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
     }
 
     @Bean
@@ -37,11 +33,6 @@ public class ApplicationConfig {
         return authProvider;
     }
 
-//    @Bean
-//    public AuditorAware<Integer> auditorAware() {
-//        return new ApplicationAuditAware();
-//    }
-
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
@@ -51,5 +42,4 @@ public class ApplicationConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

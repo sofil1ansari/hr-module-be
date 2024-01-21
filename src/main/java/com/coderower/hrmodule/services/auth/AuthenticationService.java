@@ -1,6 +1,6 @@
 package com.coderower.hrmodule.services.auth;
 
-import com.coderower.hrmodule.database.entities.Product;
+
 import com.coderower.hrmodule.models.auth.AuthenticationRequest;
 
 public interface AuthenticationService {

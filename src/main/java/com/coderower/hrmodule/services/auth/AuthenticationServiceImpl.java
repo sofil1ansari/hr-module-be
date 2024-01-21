@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 public class AuthenticationServiceImpl implements AuthenticationService {
 
 
-    public String signIn(AuthenticationRequest authenticationRequest) {
-        return  "Hello";
+	 // You need to implement the signIn method based on your application logic
+    public String signIn(AuthenticationRequest request) {
+        // Implement your logic to authenticate the user
+        // Return a token or any other response based on your requirements
+        return "Authentication successful";
     }
 }

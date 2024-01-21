@@ -11,6 +11,9 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 public class AuthUser  implements UserDetails {
+	
+	
+	
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;

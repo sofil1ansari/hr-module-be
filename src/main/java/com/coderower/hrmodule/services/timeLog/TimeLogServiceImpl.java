@@ -26,18 +26,22 @@ public class TimeLogServiceImpl implements TimeLogService {
     }
 
     @Override
-    public TimeLog delete(String id) {
-        TimeLog record = repository.findById(id).get();
+    public void delete(String id) {
+        TimeLog record = repository.findById(id);
         repository.delete(record);
+		
     }
 
     @Override
     public TimeLog update(String id, TimeLog data) {
-        TimeLog record = repository.findById(id).get();
-        record.setName(data.getName());
-        record.setPrice(data.getPrice());
-        record.setQuantity(data.getQuantity());
+        TimeLog record = repository.findById(id);
+//        record.setName(data.getName());
+//        record.setPrice(data.getPrice());
+//        record.setQuantity(data.getQuantity());
+        if(record != null) {
         repository.save(record);
+        
+    }
         return record;
     }
 }
