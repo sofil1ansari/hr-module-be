@@ -26,17 +26,14 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
-    public Employee delete(String id) {
-        Employee record = repository.findById(id).get();
+    public void delete(String id) {
+        Employee record = repository.findById(id);
         repository.delete(record);
     }
 
     @Override
     public Employee update(String id, Employee data) {
-        Employee record = repository.findById(id).get();
-        record.setName(data.getName());
-        record.setPrice(data.getPrice());
-        record.setQuantity(data.getQuantity());
+        Employee record = repository.findById(id);
         repository.save(record);
         return record;
     }
