@@ -1,5 +1,6 @@
 package com.coderower.hrmodule.api.timeLog;
 
+import com.coderower.hrmodule.database.entities.Employee;
 import com.coderower.hrmodule.database.entities.TimeLog;
 import com.coderower.hrmodule.models.timeLog.TimeLogRequestModel;
 import com.coderower.hrmodule.services.timeLog.TimeLogService;
@@ -45,5 +46,10 @@ public class TimeLogController {
     public void delete(@PathVariable String id ){
 
           service.delete(id);
+    }
+    
+    @GetMapping("/autocomplete")
+    public List<TimeLog> autocomplete(@PathVariable String query ){
+        return  service.findAndCountAll();
     }
 }

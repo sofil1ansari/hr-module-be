@@ -5,25 +5,27 @@ import com.coderower.hrmodule.models.project.ProjectRequestModel;
 import com.coderower.hrmodule.services.project.ProjectService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/project")
+@RequestMapping("/api/tenant/6349367e2a89a447fdbd5f97/project")
 public class ProjectController {
     @Autowired
     private ProjectService service;
 
+    // rows: List<Project>, count: int
     @GetMapping("")
-    public List<Project> findAndCountAll(HttpServletRequest request,
+    public  ResponseEntity<String> findAndCountAll(HttpServletRequest request,
                                      @ModelAttribute ProjectRequestModel requestModel,
                                      Optional<Integer> offset,
                                      Optional<Integer> limit,
                                      Optional <String> orderBy
                                      ) {
-        return service.findAndCountAll();
+    return	ResponseEntity.ok("{\"rows\":[],\"count\":0}");
     }
 
     @GetMapping("/{id}")

@@ -1,6 +1,7 @@
 package com.coderower.hrmodule.api.employee;
 
 import com.coderower.hrmodule.database.entities.Employee;
+import com.coderower.hrmodule.database.entities.Project;
 import com.coderower.hrmodule.models.employee.EmployeeRequestModel;
 import com.coderower.hrmodule.services.employee.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -45,5 +46,10 @@ public class EmployeeController {
     public void delete(@PathVariable String id ){
 
           service.delete(id);
+    }
+    
+    @GetMapping("/autocomplete")
+    public List<Employee> autocomplete(@PathVariable String query ){
+        return  service.findAndCountAll();
     }
 }
