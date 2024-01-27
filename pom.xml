@@ -67,7 +67,7 @@
 		</dependency>
 		<dependency>
              <groupId>org.springframework.data</groupId>
-             s<artifactId>spring-data-jpa</artifactId>
+             <artifactId>spring-data-jpa</artifactId>
         </dependency>
 	</dependencies>
 
