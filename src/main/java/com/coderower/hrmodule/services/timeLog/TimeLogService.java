@@ -6,13 +6,25 @@ import java.util.List;
 
 public interface TimeLogService {
 
-    public List<TimeLog> findAndCountAll();
+	List<TimeLog> findAndCountAll();
 
-    public TimeLog create(TimeLog data);
+	TimeLog findById(String id);
 
-    public TimeLog find(String id);
+	TimeLog createByTimeLog(TimeLog data);
 
-    public void delete(String id );
+	TimeLog updateTimeLog(String id, TimeLog updatedTimeLog);
 
-    public TimeLog update(String id , TimeLog data);
+	void deleteTimeLog(String id);
+
+
+//    public List<TimeLog> findAndCountAll();
+//
+//    public TimeLog create(TimeLog data);
+//
+//    public TimeLog find(String id);
+//
+//    public void delete(String id );
+//
+//    public TimeLog update(String id , TimeLog data);
+	
 }

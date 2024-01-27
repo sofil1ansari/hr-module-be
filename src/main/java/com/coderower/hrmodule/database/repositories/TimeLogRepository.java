@@ -1,10 +1,13 @@
 package com.coderower.hrmodule.database.repositories;
 
 import com.coderower.hrmodule.database.entities.TimeLog;
+
+import java.util.Optional;
+
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
-public interface TimeLogRepository extends MongoRepository<TimeLog,Integer> {
+public interface TimeLogRepository extends MongoRepository<TimeLog,String> {
     @Query("{ 'id' : ?0 }")
-    TimeLog findById(String id);
+    Optional<TimeLog> findById(String id);
 }

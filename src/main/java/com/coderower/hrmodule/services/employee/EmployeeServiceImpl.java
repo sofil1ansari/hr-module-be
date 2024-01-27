@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 @Service
 public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
@@ -14,27 +15,59 @@ public class EmployeeServiceImpl implements EmployeeService {
     public List<Employee> findAndCountAll() {
         return repository.findAll();
     }
+	@Override
+	public Employee findById(String id) {
+		
+		return repository.findById(id).orElse(null);
+	}
+	@Override
+	public Employee createEmployee(Employee employee) {
+	
+		return repository.save(employee);
+	}
+	@Override
+	public Employee updateEmployee(String id, Employee updateEmployee) {
+		
+		Optional<Employee> existingEmployeeOptional = repository.findById(id);
+		 
+		 if (existingEmployeeOptional.isPresent()) {
+			 Employee existingEmployee= existingEmployeeOptional.get();
+		        
+		        if (updateEmployee.getTitle() != null) {
+		            existingEmployee.setTitle(updateEmployee.getTitle());
+		        }
 
-    @Override
-    public Employee find(String id) {
-        return repository.findById(id);
-    }
+		        if (updateEmployee.getFirstName() != null) {
+		        	existingEmployee.setFirstName(updateEmployee.getFirstName());
+		        }
 
-    @Override
-    public Employee create(Employee data) {
-        return repository.save(data);
-    }
+		        if (updateEmployee.getLastName() != null) {
+		        	existingEmployee.setLastName(updateEmployee.getLastName());
+		        }
+		        
+		        if (updateEmployee.getEmail() != null) {
+		        	existingEmployee.setEmail(updateEmployee.getEmail());
+		        }
+		        
+		        if (updateEmployee.getPhoneNumber() != null) {
+		        	existingEmployee.setPhoneNumber(updateEmployee.getPhoneNumber());
+		        }
+		        
+		        if (updateEmployee.getId() != null) {
+		        	existingEmployee.setId(updateEmployee.getId());
+		        }
 
-    @Override
-    public void delete(String id) {
-        Employee record = repository.findById(id);
-        repository.delete(record);
-    }
+		        return repository.save(updateEmployee);
+		    }
 
-    @Override
-    public Employee update(String id, Employee data) {
-        Employee record = repository.findById(id);
-        repository.save(record);
-        return record;
-    }
+		    return null;
+	
+	}
+	@Override
+	public void deleteEmployee(String id) {
+		
+		repository.deleteById(id);
+	}
+
+   
 }

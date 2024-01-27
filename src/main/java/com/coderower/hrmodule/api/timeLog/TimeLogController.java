@@ -1,6 +1,5 @@
 package com.coderower.hrmodule.api.timeLog;
 
-import com.coderower.hrmodule.database.entities.Employee;
 import com.coderower.hrmodule.database.entities.TimeLog;
 import com.coderower.hrmodule.models.timeLog.TimeLogRequestModel;
 import com.coderower.hrmodule.services.timeLog.TimeLogService;
@@ -28,24 +27,24 @@ public class TimeLogController {
     }
 
     @GetMapping("/{id}")
-    public TimeLog find(@PathVariable String id ){
-        return service.find(id);
+    public TimeLog findById(@PathVariable String id ){
+        return service.findById(id);
     }
 
-    @PostMapping("/")
-    public TimeLog create(@RequestBody TimeLog data){
-        return service.create(data);
+    @PostMapping("/add")
+    public TimeLog createByTimeLog(@RequestBody TimeLog data){
+        return service.createByTimeLog(data);
     }
 
     @PutMapping("/{id}")
-    public TimeLog update(@PathVariable String id,@RequestBody TimeLog data ){
-        return service.update(id,data);
+    public TimeLog updateTimeLog(@PathVariable String id, @RequestBody TimeLog updatedTimeLog) {
+        return service.updateTimeLog(id, updatedTimeLog);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id ){
+    public void deleteTimeLog(@PathVariable String id ){
 
-          service.delete(id);
+          service.deleteTimeLog(id);
     }
     
     @GetMapping("/autocomplete")

@@ -8,11 +8,13 @@ public interface EmployeeService {
 
     public List<Employee> findAndCountAll();
 
-    public Employee create(Employee data);
+	public Employee findById(String id);
 
-    public Employee find(String id);
+	public Employee createEmployee(Employee employee);
 
-    public void delete(String id );
+	public Employee updateEmployee(String id, Employee updateEmployee);
 
-    public Employee update(String id , Employee data);
+	public void deleteEmployee(String id);
+
+   
 }

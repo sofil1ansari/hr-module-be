@@ -1,7 +1,10 @@
 package com.coderower.hrmodule.api.auth;
 
+import com.coderower.hrmodule.database.entities.User;
 import com.coderower.hrmodule.models.auth.AuthenticationRequest;
 import com.coderower.hrmodule.services.auth.AuthenticationService;
+
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
 
+
     @Autowired
     private AuthenticationService service;
 
@@ -24,8 +28,17 @@ public class AuthenticationController {
 
     @PostMapping("/sign-in")
     public ResponseEntity<String> authenticate(
+    		
             @RequestBody AuthenticationRequest request
     ) {
         return ResponseEntity.ok(service.signIn(request));
     }
+    
+    @PostMapping("/sign-up")
+    public ResponseEntity<String> signUp(@RequestBody User user) {
+    	service.registerUser(user);
+        return ResponseEntity.ok("User registered successfully");
+    }
+    
+    
 }

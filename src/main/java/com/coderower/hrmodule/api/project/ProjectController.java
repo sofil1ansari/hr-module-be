@@ -13,39 +13,98 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/tenant/6349367e2a89a447fdbd5f97/project")
+
 public class ProjectController {
     @Autowired
     private ProjectService service;
 
-    // rows: List<Project>, count: int
-    @GetMapping("")
-    public  ResponseEntity<String> findAndCountAll(HttpServletRequest request,
-                                     @ModelAttribute ProjectRequestModel requestModel,
-                                     Optional<Integer> offset,
-                                     Optional<Integer> limit,
-                                     Optional <String> orderBy
-                                     ) {
-    return	ResponseEntity.ok("{\"rows\":[],\"count\":0}");
+    // rows: List<Project>, count: int;
+//    @GetMapping("")
+//    public  ResponseEntity<String> findAndCountAll(HttpServletRequest request,
+//                                     @ModelAttribute ProjectRequestModel requestModel,
+//                                     Optional<Integer> offset,
+//                                     Optional<Integer> limit,
+//                                     Optional <String> orderBy
+//                                     ) {
+//    return	ResponseEntity.ok("{\"rows\":[{\"name\":\"test\"}],\"count\":1}");
+//    }
+    
+//    @GetMapping()
+//    
+//    public List<Project>findAndCountAll(HttpServletRequest request,@ModelAttribute ProjectRequestModel requestModel,
+//    		                            Optional<Integer> offset,
+//    		                            Optional<Integer> limit,
+//    		                            Optional <String> orderBy){
+//    	
+//		return service.findAndCountAll();
+//    	
+//    }
+//
+//    @GetMapping("/{id}")
+//    public Project find(@PathVariable String id ){
+//        return service.find(id);
+//    }
+//
+//    @PostMapping("/")
+//    public List< Project> create(@RequestBody Project data) {
+//        return service.create(data);
+//    }
+//
+//    @PutMapping("/{id}")
+//    public Project update(@PathVariable String id,@RequestBody Project data ) {
+//        return service.update(id,data);
+//    }
+//
+//    @DeleteMapping("/{id}")
+//    public void delete(@PathVariable String id ) {
+//
+//          service.delete(id);
+//    }
+//    
+//    @GetMapping("/autocomplete")
+//    public List<Project> autocomplete(@PathVariable String query ) {
+//        return  service.findAndCountAll();
+//    }
+    
+
+    @GetMapping
+    public List<Project> getAllProjects() {
+        return service.findAllProjects();
     }
 
     @GetMapping("/{id}")
-    public Project find(@PathVariable String id ){
-        return service.find(id);
+    public Project getProjectById(@PathVariable String id) {
+        return service.findProjectById(id);
     }
 
-    @PostMapping("/")
-    public Project create(@RequestBody Project data){
-        return service.create(data);
+    @PostMapping("/add")
+    public Project addProject(@RequestBody Project project) {
+        return service.addProject(project);
     }
 
     @PutMapping("/{id}")
-    public Project update(@PathVariable String id,@RequestBody Project data ){
-        return service.update(id,data);
+    public Project updateProject(@PathVariable String id, @RequestBody Project updatedProject) {
+        return service.updateProject(id, updatedProject);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id ){
-
-          service.delete(id);
+    public void deleteProject(@PathVariable String id) {
+    	service.deleteProject(id);
     }
+
+    @GetMapping("/findAndCountAll")
+    public List<Project> findAndCountAll(
+            @ModelAttribute ProjectRequestModel requestModel,
+            @RequestParam(required = false) Integer offset,
+            @RequestParam(required = false) Integer limit,
+            @RequestParam(required = false) String orderBy) {
+
+        return service.findAndCountAll(requestModel, offset, limit, orderBy);
+    }
+    
+    @GetMapping("/autocomplete")
+  public List<Project> autocomplete(@PathVariable String query ) {
+      return  service.findAndCountAll();
+  }
+    
 }

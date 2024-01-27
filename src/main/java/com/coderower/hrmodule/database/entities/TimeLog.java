@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="timeLog")
 public class TimeLog {
 
+  public String id;
   public String email;
   public String workItem;
 

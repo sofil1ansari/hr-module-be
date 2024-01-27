@@ -1,7 +1,6 @@
 package com.coderower.hrmodule.api.employee;
 
 import com.coderower.hrmodule.database.entities.Employee;
-import com.coderower.hrmodule.database.entities.Project;
 import com.coderower.hrmodule.models.employee.EmployeeRequestModel;
 import com.coderower.hrmodule.services.employee.EmployeeService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -28,24 +27,24 @@ public class EmployeeController {
     }
 
     @GetMapping("/{id}")
-    public Employee find(@PathVariable String id ){
-        return service.find(id);
+    public Employee findById(@PathVariable String id ){
+        return service.findById(id);
     }
 
-    @PostMapping("/")
-    public Employee create(@RequestBody Employee data){
-        return service.create(data);
+    @PostMapping("/add")
+    public Employee createEmployee(@RequestBody Employee employee){
+        return service.createEmployee(employee);
     }
 
     @PutMapping("/{id}")
-    public Employee update(@PathVariable String id,@RequestBody Employee data ){
-        return service.update(id,data);
+    public Employee updateEmployee(@PathVariable String id,@RequestBody Employee updateEmployee ){
+        return service.updateEmployee(id,updateEmployee);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id ){
+    public void deleteEmployee(@PathVariable String id ){
 
-          service.delete(id);
+          service.deleteEmployee(id);
     }
     
     @GetMapping("/autocomplete")
