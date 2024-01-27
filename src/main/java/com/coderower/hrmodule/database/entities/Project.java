@@ -12,8 +12,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @Document(collection ="project")
 public class Project {
-
-  public String id;
   public String name;
   public String description;
 

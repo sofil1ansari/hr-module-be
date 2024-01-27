@@ -1,42 +1,21 @@
 package com.coderower.hrmodule.services.project;
 
-import com.coderower.hrmodule.database.entities.Project;
-import com.coderower.hrmodule.models.project.ProjectRequestModel;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
-import java.util.List;
+import com.coderower.hrmodule.database.entities.Project;
 
 public interface ProjectService {
 
-	List<Project> findAllProjects();
+	Page<Project> findAndCountAll(PageRequest pageRequest);
 
-	Project findProjectById(String id);
+	Project find(String id);
 
-	Project addProject(Project project);
+	Project create(Project data);
 
-	Project updateProject(String id, Project updatedProject);
+	Project update(String id, Project data);
 
-	void deleteProject(String id);
-
-	List<Project> findAndCountAll(ProjectRequestModel 
-			                      requestModel, Integer 
-			                      offset, Integer 
-			                      limit, String orderBy);
-
-	List<Project> findAndCountAll();
+	void delete(String id);
 
 
-
-
-
-//    public List<Project> findAndCountAll();
-//
-//    public List<Project> create(Project data);
-//
-//    public Project find(String id);
-//
-//    public void delete(String id );
-//
-//    public Project update(String id , Project data);
-	
-	
 }
