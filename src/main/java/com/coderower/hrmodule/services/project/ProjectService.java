@@ -2,11 +2,12 @@ package com.coderower.hrmodule.services.project;
 
 import com.coderower.hrmodule.database.entities.Project;
 
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 
 public interface ProjectService {
 
-    public List<Project> findAndCountAll();
+	public Page<Project> findAndCountAll(PageRequest pageRequest);
 
     public Project create(Project data);
 

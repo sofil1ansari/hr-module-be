@@ -65,6 +65,10 @@
 			<artifactId>jjwt-jackson</artifactId>
 			<version>0.11.5</version>
 		</dependency>
+		<dependency>
+             <groupId>org.springframework.data</groupId>
+             s<artifactId>spring-data-jpa</artifactId>
+        </dependency>
 	</dependencies>
 
 	<build>
