@@ -1,6 +1,4 @@
 package com.coderower.hrmodule.api.project;
-
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -28,52 +26,63 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/tenant/6349367e2a89a447fdbd5f97/project")
-
 public class ProjectController {
+	
 	 @Autowired
-	    private ProjectService service;
-	 
+	  private ProjectService service;
+
 	 @GetMapping("")
-	    public ResponseEntity<Map<String, Object>> getProjects(HttpServletRequest request,
-	                                                           @ModelAttribute ProjectRequestModel requestModel,
-	                                                           @RequestParam(defaultValue = "0") int offset,
-	                                                           @RequestParam(defaultValue = "10") int limit,
-	                                                           @RequestParam(defaultValue = "id") String orderBy) {
-	        int page = offset / limit;
+	 public ResponseEntity<Object> findAndCountAll(
+	         HttpServletRequest request,
+	         @ModelAttribute ProjectRequestModel requestModel,
+	         @RequestParam Optional<String> name, 
+	         @RequestParam Optional<Integer> offset,
+	         @RequestParam Optional<Integer> limit,
+	         @RequestParam Optional<String> orderBy
+	 ) 
+	 {
+		 System.out.println("Name parameter: " + name.orElse("Not provided"));
+		  
+	     int page = offset.orElse(0) / limit.orElse(10);
 
-	        Sort sort = orderBy.isEmpty() ? Sort.unsorted() : Sort.by(Sort.Direction.ASC, orderBy);
-	        Page<Project> projectsPage = service.findAndCountAll(PageRequest.of(page, limit, sort));
+	     Sort sort = orderBy.map(property -> property.isEmpty() ? Sort.unsorted() : Sort.by(Sort.Direction.ASC, property))
+	             .orElse(Sort.unsorted());
 
-	        Map<String, Object> response = new HashMap<>();
-	        response.put("rows", projectsPage.getContent());
-	        response.put("count", projectsPage.getTotalElements());
+	     Page<Project> projects;
 
-	        return ResponseEntity.ok(response);
-	    }
+	     if (name.isPresent()) {
+	         projects = service.findAndCountByName(name.get(), PageRequest.of(page, limit.orElse(10), sort));
+	         System.out.println(".............."+name);
+	     } else {
+	         projects = service.findAndCountAll(PageRequest.of(page, limit.orElse(10), sort));
+	     }
 
-	    @GetMapping("/{id}")
-	    public ResponseEntity<Project> getProjectById(@PathVariable String id) {
-	        Project project = service.find(id);
-	        return project != null ? ResponseEntity.ok(project) : ResponseEntity.notFound().build();
-	    }
+	     return ResponseEntity.ok(Map.of("rows", projects.getContent(), "count", projects.getTotalElements()));
+	 }
 
-	    @PostMapping("/")
-	    public ResponseEntity<Project> createProject(@RequestBody Project project) {
-	        Project createdProject = service.create(project);
-	        return ResponseEntity.ok(createdProject);
-	    }
+	 
+    @GetMapping("/{id}")
+    public Project find(@PathVariable String id ) {
+    	
+        return service.find(id);
+    }
+    
+    
 
-	    @PutMapping("/{id}")
-	    public ResponseEntity<Project> updateProject(@PathVariable String id, @RequestBody Project projectData) {
-	        Project updatedProject = service.update(id, projectData);
-	        return updatedProject != null ? ResponseEntity.ok(updatedProject) : ResponseEntity.notFound().build();
-	    }
+    @PostMapping("/")
+    public Project create(@RequestBody Project data){
+        return service.create(data);
+    }
 
-	    @DeleteMapping("/{id}")
-	    public ResponseEntity<Void> deleteProject(@PathVariable String id) {
-	    	service.delete(id);
-	        return ResponseEntity.noContent().build();
-	    }
+    @PutMapping("/{id}")
+    public Project update(@PathVariable String id,@RequestBody Project data ){
+        return service.update(id,data);
+    }
 
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String id ){
+
+          service.delete(id);
+    }
 	 
 }

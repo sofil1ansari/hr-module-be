@@ -1,21 +1,26 @@
 package com.coderower.hrmodule.services.project;
 
+import com.coderower.hrmodule.database.entities.Project;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-
-import com.coderower.hrmodule.database.entities.Project;
+import org.springframework.data.domain.Pageable;
 
 public interface ProjectService {
 
-	Page<Project> findAndCountAll(PageRequest pageRequest);
+	public Page<Project> findAndCountAll(PageRequest pageRequest);
 
-	Project find(String id);
+    public Project create(Project data);
 
-	Project create(Project data);
+    public Project find(String id);
 
-	Project update(String id, Project data);
+    public void delete(String id );
 
-	void delete(String id);
+    public Project update(String id , Project data);
 
+	Page<Project> findByNameAndDescription(String name, String description, Pageable pageable);
 
+	public Page<Project> findAndCountByName(String name, PageRequest pageRequest);
+
+    
 }

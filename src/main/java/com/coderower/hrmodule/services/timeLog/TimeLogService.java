@@ -4,27 +4,21 @@ import com.coderower.hrmodule.database.entities.TimeLog;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+
 public interface TimeLogService {
 
-	List<TimeLog> findAndCountAll();
+	 public Page<TimeLog> findAndCountAll(PageRequest pageRequest);
 
-	TimeLog findById(String id);
+	    public TimeLog create(TimeLog data);
 
-	TimeLog createByTimeLog(TimeLog data);
+	    public TimeLog find(String id);
 
-	TimeLog updateTimeLog(String id, TimeLog updatedTimeLog);
+	    public void delete(String id );
 
-	void deleteTimeLog(String id);
+	    public TimeLog update(String id , TimeLog data);
 
+		//public List<TimeLog> findAndCountAll(String query);
 
-//    public List<TimeLog> findAndCountAll();
-//
-//    public TimeLog create(TimeLog data);
-//
-//    public TimeLog find(String id);
-//
-//    public void delete(String id );
-//
-//    public TimeLog update(String id , TimeLog data);
-	
 }
