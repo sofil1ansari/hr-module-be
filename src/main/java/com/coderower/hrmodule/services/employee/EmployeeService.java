@@ -9,7 +9,7 @@ import org.springframework.data.domain.PageRequest;
 
 public interface EmployeeService {
 	
-	 public Page<Employee> findAndCountAll(PageRequest pageRequest);
+	   public Page<Employee> findAndCountAll(PageRequest pageRequest);
 
 	    public Employee create(Employee data);
 
@@ -22,6 +22,8 @@ public interface EmployeeService {
 		public List<Employee> findAndCountAll();
 
 		public List<Employee> findAndCountAll(String query);
+
+		public Employee findBytitle(String title);
 	
 
 }

@@ -1,9 +1,6 @@
 package com.coderower.hrmodule.models.project;
 
 import java.util.Map;
-import java.util.Optional;
-
-import static java.util.Optional.ofNullable;
 
 public class ProjectRequestModel {
 
@@ -18,4 +15,6 @@ public class ProjectRequestModel {
     public void setFilter(Map<String, Object> filter) {
         this.filter = filter;
     }
+
+	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/tenant/6349367e2a89a447fdbd5f97/employee")
@@ -26,7 +27,8 @@ public class EmployeeController {
                                      @ModelAttribute EmployeeRequestModel requestModel,
                                      Optional<Integer> offset,
                                      Optional<Integer> limit,
-                                     Optional <String> orderBy
+                                     Optional <String> orderBy,
+                                     @RequestParam(required = false) String name
                                      ) {
     	int page = offset.orElse(0) / limit.orElse(20);
     	 
@@ -34,11 +36,14 @@ public class EmployeeController {
  	                      .orElse(Sort.unsorted());
 
  	    Page<Employee> employee = service.findAndCountAll(PageRequest.of(page, limit.orElse(20), sort));
-    	    
+    	    if(name.isBlank()) {
+    	    	List<Employee> newList=employee.stream().filter(item->item.row==name).collect(Collectors.toList());
+    	    	System.out.println(newList);
+    	    }
     	    return ResponseEntity.ok(Map.of("rows", employee.getContent(), "count", employee.getTotalElements()));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("{id}")
     public Employee find(@PathVariable String id ){
         return service.find(id);
     }
@@ -63,6 +68,6 @@ public class EmployeeController {
     
    @GetMapping("/autocomplete")
    public List<Employee> autocomplete(@PathVariable String query ){
-       return  service.findAndCountAll();
+       return  service.findAndCountAll(query);
    }
 }

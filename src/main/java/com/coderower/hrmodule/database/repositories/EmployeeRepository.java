@@ -10,7 +10,7 @@ public interface EmployeeRepository extends MongoRepository<Employee,String> {
     @Query("{ 'id' : ?0 }")
     Optional<Employee> findById(String id);
 
-//    @Query("{ 'query' : ?0 }")
-//	List<Employee> findByName(String query);
-   
+    @Query("{ 'title' : ?0 }")
+    Employee findBytitle(String title);
+
 }

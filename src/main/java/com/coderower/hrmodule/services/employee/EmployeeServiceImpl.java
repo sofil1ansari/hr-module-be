@@ -62,7 +62,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
 	@Override
 	public List<Employee> findAndCountAll(String query) {
-		// TODO Auto-generated method stub
+		
 		return repository.findAll();
+	}
+
+	@Override
+	public Employee findBytitle(String title) {
+		
+		return repository.findBytitle(title);
 	}
 }
