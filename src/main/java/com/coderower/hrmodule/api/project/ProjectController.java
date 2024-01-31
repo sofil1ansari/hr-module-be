@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.coderower.hrmodule.database.entities.Project;
+import com.coderower.hrmodule.database.repositories.ProjectRepository;
 import com.coderower.hrmodule.models.project.ProjectRequestModel;
 import com.coderower.hrmodule.services.project.ProjectService;
-
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -30,36 +30,37 @@ public class ProjectController {
 	
 	 @Autowired
 	  private ProjectService service;
+	 
+	 @Autowired
+	 private ProjectRepository repository;
 
 	 @GetMapping("")
-	 public ResponseEntity<Object> findAndCountAll(
-	         HttpServletRequest request,
-	         @ModelAttribute ProjectRequestModel requestModel,
-	         @RequestParam Optional<String> name, 
-	         @RequestParam Optional<Integer> offset,
-	         @RequestParam Optional<Integer> limit,
-	         @RequestParam Optional<String> orderBy
-	 ) 
-	 {
-		 System.out.println("Name parameter: " + name.orElse("Not provided"));
-		  
-	     int page = offset.orElse(0) / limit.orElse(10);
+	    public ResponseEntity<Object> findAndCountAll(
+	            HttpServletRequest request,
+	            @ModelAttribute ProjectRequestModel requestModel,
+	            @RequestParam Optional<Integer> offset,
+	            @RequestParam Optional<Integer> limit,
+	            @RequestParam Optional<String> orderBy,
+	            @RequestParam(name = "filter[name]", required = false) String filterName
+	    ) {
 
-	     Sort sort = orderBy.map(property -> property.isEmpty() ? Sort.unsorted() : Sort.by(Sort.Direction.ASC, property))
-	             .orElse(Sort.unsorted());
+	        int page = offset.orElse(0) / limit.orElse(10);
 
-	     Page<Project> projects;
+	        Sort sort = orderBy.map(property -> property.isEmpty() ? Sort.unsorted() : Sort.by(Sort.Direction.ASC, property))
+	                .orElse(Sort.unsorted());
 
-	     if (name.isPresent()) {
-	         projects = service.findAndCountByName(name.get(), PageRequest.of(page, limit.orElse(10), sort));
-	         System.out.println(".............."+name);
-	     } else {
-	         projects = service.findAndCountAll(PageRequest.of(page, limit.orElse(10), sort));
-	     }
+	        Page<Project> project;
 
-	     return ResponseEntity.ok(Map.of("rows", projects.getContent(), "count", projects.getTotalElements()));
-	 }
+	        if (filterName != null) {
+	            project = repository.findAndCountAllByNameContainingIgnoreCase(filterName, PageRequest.of(page, limit.orElse(10), sort));
+	        } else {
+	            
+	            project = service.findAndCountAll(PageRequest.of(page, limit.orElse(10), sort));
+	        }
 
+	        return ResponseEntity.ok(Map.of("rows", project.getContent(), "count", project.getTotalElements()));
+	    
+	}	 
 	 
     @GetMapping("/{id}")
     public Project find(@PathVariable String id ) {
