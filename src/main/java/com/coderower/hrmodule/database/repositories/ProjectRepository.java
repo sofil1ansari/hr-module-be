@@ -15,13 +15,8 @@ import org.springframework.data.repository.query.Param;
 
 public interface ProjectRepository extends MongoRepository<Project,String> {
 	
-	@Query("{ 'id' : ?0 }")
-    Optional<Project> findById(String id);
+	    @Query("{ 'id' : ?0 }")
+	    Optional<Project> findById(String id);
 
-    @Query("{ 'name' : { $regex: ?0, $options: 'i' }, 'description' : { $regex: ?1, $options: 'i' } }")
-    Page<Project> findByNameAndDescription(@Param("name") String name, @Param("description") String description, PageRequest pageable);
-
-    Page<Project> findByName(String name, PageRequest pageRequest);
-
-	Page<Project> findByNameAndDescription(String name, String description, Pageable pageable);
+		Page<Project> findAndCountAllByNameContainingIgnoreCase(String filterName, PageRequest of);
 }

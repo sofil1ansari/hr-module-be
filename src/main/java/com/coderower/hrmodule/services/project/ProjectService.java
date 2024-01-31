@@ -2,9 +2,10 @@ package com.coderower.hrmodule.services.project;
 
 import com.coderower.hrmodule.database.entities.Project;
 
+import java.util.List;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 
 public interface ProjectService {
 
@@ -17,10 +18,6 @@ public interface ProjectService {
     public void delete(String id );
 
     public Project update(String id , Project data);
-
-	Page<Project> findByNameAndDescription(String name, String description, Pageable pageable);
-
-	public Page<Project> findAndCountByName(String name, PageRequest pageRequest);
 
     
 }

@@ -5,8 +5,9 @@ import com.coderower.hrmodule.database.repositories.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Optional;
 @Service
 
@@ -49,19 +50,5 @@ public class ProjectServiceImpl implements ProjectService {
         return null;
 
     }
-
-    @Override
-    public Page<Project> findByNameAndDescription(String name, String description, Pageable pageable) {
-        return repository.findByNameAndDescription(name, description, pageable);
-    }
-	
-
-
-	@Override
-	public Page<Project> findAndCountByName(String name, PageRequest pageRequest) {
-		 System.out.println("Searching by name: " + name);
-		
-		return repository.findByName(name, pageRequest);
-	}
 	
 }
