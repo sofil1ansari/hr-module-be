@@ -1,7 +1,9 @@
 package com.coderower.hrmodule.api.project;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import com.coderower.hrmodule.database.entities.JsonRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -67,8 +69,8 @@ public class ProjectController {
     	
         return service.find(id);
     }
-    
-    
+
+
 
     @PostMapping("/")
     public Project create(@RequestBody Project data){
@@ -76,8 +78,9 @@ public class ProjectController {
     }
 
     @PutMapping("/{id}")
-    public Project update(@PathVariable String id,@RequestBody Project data ){
-        return service.update(id,data);
+    public Project update(@PathVariable String id,@RequestBody JsonRequest jsonRequest ){
+		Project data = jsonRequest.getData();
+		return service.update(id,data);
     }
 
     @DeleteMapping("/{id}")
@@ -85,5 +88,5 @@ public class ProjectController {
 
           service.delete(id);
     }
-	 
+
 }
