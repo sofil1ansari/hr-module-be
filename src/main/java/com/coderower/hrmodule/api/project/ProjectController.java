@@ -71,11 +71,11 @@ public class ProjectController {
     }
 
 
-
-    @PostMapping("/")
-    public Project create(@RequestBody Project data){
-        return service.create(data);
-    }
+	@PostMapping("")
+	public Project create(@RequestBody JsonRequest jsonRequest){
+		Project data = jsonRequest.getData();
+		return service.create(data);
+	}
 
     @PutMapping("/{id}")
     public Project update(@PathVariable String id,@RequestBody JsonRequest jsonRequest ){
@@ -83,10 +83,11 @@ public class ProjectController {
 		return service.update(id,data);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id ){
-
-          service.delete(id);
-    }
+	@DeleteMapping("")
+	public void delete(@RequestParam(name = "ids[]") List<String> ids) {
+		for (String id : ids) {
+			service.delete(id);
+		}
+	}
 
 }

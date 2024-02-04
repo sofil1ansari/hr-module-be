@@ -13,6 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection ="project")
 public class Project {
 
+  @Id
   public String id;
   public String name;
   public String description;
