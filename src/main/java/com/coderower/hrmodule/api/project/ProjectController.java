@@ -1,5 +1,6 @@
 package com.coderower.hrmodule.api.project;
 
+import com.coderower.hrmodule.database.entities.JsonRequest;
 import com.coderower.hrmodule.database.entities.Project;
 import com.coderower.hrmodule.models.project.ProjectRequestModel;
 import com.coderower.hrmodule.services.project.ProjectService;
@@ -11,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -42,19 +44,23 @@ public class ProjectController {
         return service.find(id);
     }
 
-    @PostMapping("/")
-    public Project create(@RequestBody Project data){
+    @PostMapping("")
+    public Project create(@RequestBody JsonRequest jsonRequest){
+        Project data = jsonRequest.getData();
         return service.create(data);
     }
 
     @PutMapping("/{id}")
-    public Project update(@PathVariable String id,@RequestBody Project data ){
+    public Project update(@PathVariable String id,@RequestBody JsonRequest jsonRequest ){
+        Project data = jsonRequest.getData();
         return service.update(id,data);
     }
 
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable String id ){
-
-          service.delete(id);
+    @DeleteMapping("")
+    public void delete(@RequestParam(name = "ids[]") List<String> ids) {
+        for (String id : ids) {
+            service.delete(id);
+        }
     }
+
 }
