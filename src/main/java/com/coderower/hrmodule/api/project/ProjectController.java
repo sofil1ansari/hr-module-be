@@ -9,16 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.coderower.hrmodule.database.entities.Project;
 import com.coderower.hrmodule.database.repositories.ProjectRepository;
@@ -28,6 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/tenant/6349367e2a89a447fdbd5f97/project")
+@CrossOrigin("*")
 public class ProjectController {
 	
 	 @Autowired
@@ -73,13 +65,13 @@ public class ProjectController {
 
 	@PostMapping("")
 	public Project create(@RequestBody JsonRequest jsonRequest){
-		Project data = jsonRequest.getData();
+		Project data = jsonRequest.getProjectData();
 		return service.create(data);
 	}
 
     @PutMapping("/{id}")
     public Project update(@PathVariable String id,@RequestBody JsonRequest jsonRequest ){
-		Project data = jsonRequest.getData();
+		Project data = jsonRequest.getProjectData();
 		return service.update(id,data);
     }
 

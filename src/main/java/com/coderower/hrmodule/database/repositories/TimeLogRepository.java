@@ -5,6 +5,8 @@ import com.coderower.hrmodule.database.entities.TimeLog;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.data.mongodb.repository.Query;
 
@@ -14,4 +16,6 @@ public interface TimeLogRepository extends MongoRepository<TimeLog,String> {
 
 //    @Query("{ 'query' : ?0 }")
 //	List<TimeLog> findByNameContainingIgnoreCase(String query);
+
+    Page<TimeLog> findAndCountAllByEmployeeContainingIgnoreCase(String filterEmployee, PageRequest of);
 }

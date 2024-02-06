@@ -6,10 +6,10 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JsonRequest {
-    private Project data;
+    private Object data;
 
-    public Project getData() {
-        return data;
+    public Project getProjectData() {
+        return (Project) data;
     }
 
     public void setData(Project data) {

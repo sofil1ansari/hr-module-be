@@ -43,7 +43,6 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public Employee update(String id, Employee data) {
 		Employee existingEmployee = repository.findById(id).orElse(null);
 		 if (existingEmployee != null) {
-			 existingEmployee.setId(data.getId());
 			 existingEmployee.setTitle(data.getTitle());
 			 existingEmployee.setFirstName(data.getFirstName());
 			 existingEmployee.setLastName(data.getLastName());
