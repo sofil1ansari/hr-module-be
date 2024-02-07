@@ -5,14 +5,14 @@ import lombok.NoArgsConstructor;
 
 @AllArgsConstructor
 @NoArgsConstructor
-public class JsonRequest {
-    private Object data;
+public class JsonRequest<T> {
+    private T data;
 
-    public Project getProjectData() {
-        return (Project) data;
+    public T getData() {
+        return data;
     }
 
-    public void setData(Project data) {
+    public void setData(T data) {
         this.data = data;
     }
 }

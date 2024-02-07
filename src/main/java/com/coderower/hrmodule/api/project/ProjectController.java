@@ -64,14 +64,14 @@ public class ProjectController {
 
 
 	@PostMapping("")
-	public Project create(@RequestBody JsonRequest jsonRequest){
-		Project data = jsonRequest.getProjectData();
+	public Project create(@RequestBody  JsonRequest<Project>  jsonRequest){
+		Project data = jsonRequest.getData();
 		return service.create(data);
 	}
 
     @PutMapping("/{id}")
-    public Project update(@PathVariable String id,@RequestBody JsonRequest jsonRequest ){
-		Project data = jsonRequest.getProjectData();
+    public Project update(@PathVariable String id,@RequestBody  JsonRequest<Project>  jsonRequest ){
+		Project data = jsonRequest.getData();
 		return service.update(id,data);
     }
 

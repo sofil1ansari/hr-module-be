@@ -55,13 +55,14 @@ public class EmployeeController {
     }
 
     @PostMapping("")
-    public Employee create(@RequestBody Employee data){
-        System.out.println(data.toString());
+    public Employee create(@RequestBody JsonRequest<Employee> jsonRequest){
+        Employee data = jsonRequest.getData();
         return service.create(data);
     }
 
     @PutMapping("/{id}")
-    public Employee update(@PathVariable String id,@RequestBody Employee data ){
+    public Employee update(@PathVariable String id,@RequestBody JsonRequest<Employee> jsonRequest){
+        Employee data = jsonRequest.getData();
         return service.update(id,data);
     }
 

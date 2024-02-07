@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 public interface TimeLogService {
 
@@ -19,6 +20,8 @@ public interface TimeLogService {
 
 	    public TimeLog update(String id , TimeLog data);
 
-		//public List<TimeLog> findAndCountAll(String query);
+	    Page<TimeLog> findAndCountAllByEmployeeTitleContainingIgnoreCase(String filterEmployeeTitle, Pageable pageable);
+
+	//public List<TimeLog> findAndCountAll(String query);
 
 }
